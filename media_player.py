@@ -87,7 +87,7 @@ class MediaPlayer:
 
 
 if __name__ == "__main__":
-    root = tk.Tk()          #Creating root window
+    root = tk.Tk()                                              #Creating root window
     #Setting dimensiond and background color
     root.geometry("400x200")
     root.config(bg="black")
