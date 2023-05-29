@@ -45,29 +45,31 @@ class MediaPlayer:
         file_path = filedialog.askopenfilename(filetypes=[("Audio Files", ("*.mp3", "*.wav", "*.ogg"))])
         if file_path:
             self.file_path = file_path
+            # Remove the label from the screen
+            self.label_file.pack_forget()
             #self.label_file.config(text=self.file_path) ...shows the path of file selected
             self.label_song_name.config(text="")
             #Enable the play button
             self.Play.config(state=tk.NORMAL)
             #Auto play the selected file
             self.play_media()
-     
-    def play_file(self):                                        #Triggered when user clicks play button
-        self.play_media()                                       #Initiate playback by calling play_media fucntion
     
-    def pause_file(self):                                       #Triggered when user clicks pause button
+    def play_file(self):            #Triggered when user clicks play button
+        self.play_media()           #Initiate playback by calling play_media fucntion
+    
+    def pause_file(self):           #Triggered when user clicks pause button
         if not self.paused:
-            mixer.music.pause()                                 #pause audio
+            mixer.music.pause()         #pause audio
         else:
-            mixer.music.unpause()                               #resume audio
+            mixer.music.unpause()           #resume audio
         self.paused = not self.paused
 
-    def stop_file(self):                                        #Triggered when user clicks stop button
-        mixer.music.stop()                                      #stop audio
-        self.Pause.config(state=tk.DISABLED)                    #disable pause button
-        self.Stop.config(state=tk.DISABLED)                     #disable stop button
+    def stop_file(self):            #Triggered when user clicks stop button
+        mixer.music.stop()          #stop audio
+        self.Pause.config(state=tk.DISABLED)            #disable pause button
+        self.Stop.config(state=tk.DISABLED)             #disable stop button
 
-    def change_volume(self, value):                             #Triggered when user clicks '+'/'-' button
+    def change_volume(self, value):             #Triggered when user clicks '+'/'-' button
         new_volume = self.volume + value
         if 0 <= new_volume <= 1:
             self.volume = new_volume
@@ -75,10 +77,10 @@ class MediaPlayer:
 
     def play_media(self):
         try:
-            mixer.music.load(self.file_path)                    #load selected file
-            mixer.music.play()                                  #start playing selected file
-            self.Pause.config(state=tk.NORMAL)                  #enable pause button
-            self.Stop.config(state=tk.NORMAL)                   #enable stop button
+            mixer.music.load(self.file_path)            #load selected file
+            mixer.music.play()              #start playing selected file
+            self.Pause.config(state=tk.NORMAL)          #enable pause button
+            self.Stop.config(state=tk.NORMAL)           #enable stop button
             song_name = self.file_path.split("/")[-1]
             self.label_song_name.config(text=song_name)         #display song name
         except Exception as e:
@@ -87,7 +89,7 @@ class MediaPlayer:
 
 
 if __name__ == "__main__":
-    root = tk.Tk()                                              #Creating root window
+    root = tk.Tk()          #Creating root window
     #Setting dimensiond and background color
     root.geometry("400x200")
     root.config(bg="black")
